@@ -11,5 +11,6 @@ ODOO_PORT = int(os.getenv("ODOO_PORT"))
 ODOO_MASTER_PASSWORD = os.getenv("ODOO_MASTER_PASSWORD")
 
 def get_db_list():
-    common = xmlrpc.client.ServerProxy(f"{ODOO_URL}:{ODOO_PORT}/xmlrpc/2/common")
-    return common.list_databases()
+    db = xmlrpc.client.ServerProxy(f"{ODOO_URL}:{ODOO_PORT}/xmlrpc/2/db")
+    db_list = db.list()
+    return db_list
