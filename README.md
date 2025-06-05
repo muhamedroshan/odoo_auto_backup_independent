@@ -1,4 +1,4 @@
-# Python program that run indepently outside odoo to create automatic backups
+# Python program that run independently outside odoo to create automatic backups
 To achieve independent automated weekly backups of your Odoo databases and store them on another server or locally, while retaining the last 4 weeks of backups
 
 ## How to setup
