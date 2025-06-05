@@ -11,17 +11,17 @@ load_dotenv()
 ODOO_URL = os.getenv("ODOO_URL")
 ODOO_PORT = int(os.getenv("ODOO_PORT"))
 ODOO_MASTER_PASSWORD = os.getenv("ODOO_MASTER_PASSWORD")
-LOCAL_BACKUP_DIR = os.getenv("LOCAL_BACKUP_DIR")
+TEMP_LOCAL_BACKUP_DIR = os.getenv("TEMP_LOCAL_BACKUP_DIR")
 
 
 
 def backup_database(db_name):
 
-    os.makedirs(LOCAL_BACKUP_DIR, exist_ok=True)
+    os.makedirs(TEMP_LOCAL_BACKUP_DIR, exist_ok=True)
 
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     backup_file = f"{db_name}_{timestamp}.zip"
-    backup_path = os.path.join(LOCAL_BACKUP_DIR, backup_file)
+    backup_path = os.path.join(TEMP_LOCAL_BACKUP_DIR, backup_file)
 
     db = xmlrpc.client.ServerProxy(f"{ODOO_URL}:{ODOO_PORT}/xmlrpc/db")
     backup_data = db.dump(ODOO_MASTER_PASSWORD, db_name, 'zip')

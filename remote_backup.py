@@ -10,30 +10,31 @@ REMOTE_HOST = os.getenv("REMOTE_HOST")
 REMOTE_PORT = os.getenv("REMOTE_PORT")
 REMOTE_USERNAME = os.getenv("REMOTE_USERNAME")
 REMOTE_PASSWORD = os.getenv("REMOTE_PASSWORD")
+REMOTE_BACKUP_DIR = os.getenv("REMOTE_BACKUP_DIR", "/opt/odoo_backups/")
 
-def remote_upload_backup(local_path, remote_path):
-    transport = paramiko.Transport((REMOTE_HOST, REMOTE_PORT))
+def remote_upload_backup(local_path):
+    transport = paramiko.Transport((REMOTE_HOST, int(REMOTE_PORT)))
     transport.connect(username=REMOTE_USERNAME, password=REMOTE_PASSWORD)
     sftp = paramiko.SFTPClient.from_transport(transport)
 
     try:
-        sftp.chdir(remote_path)
+        sftp.chdir(REMOTE_BACKUP_DIR)
     except IOError:
-        sftp.mkdir(remote_path)
-        sftp.chdir(remote_path)
+        sftp.mkdir(REMOTE_BACKUP_DIR)
+        sftp.chdir(REMOTE_BACKUP_DIR)
 
     filename = os.path.basename(local_path)
-    sftp.put(local_path, os.path.join(remote_path, filename))
+    sftp.put(local_path, os.path.join(REMOTE_BACKUP_DIR, filename))
     sftp.close()
     transport.close()
 
-def remote_cleanup_old_backups(remote_path, prefix):
-    transport = paramiko.Transport((REMOTE_HOST, REMOTE_PORT))
+def remote_cleanup_old_backups(prefix):
+    transport = paramiko.Transport((REMOTE_HOST, int(REMOTE_PORT)))
     transport.connect(username=REMOTE_USERNAME, password=REMOTE_PASSWORD)
     sftp = paramiko.SFTPClient.from_transport(transport)
 
     try:
-        sftp.chdir(remote_path)
+        sftp.chdir(REMOTE_BACKUP_DIR)
     except IOError:
         print("Remote path not found.")
         sftp.close()
@@ -46,7 +47,7 @@ def remote_cleanup_old_backups(remote_path, prefix):
     )
 
     for f in files[4:]:
-        sftp.remove(os.path.join(remote_path, f))
+        sftp.remove(os.path.join(REMOTE_BACKUP_DIR, f))
 
     sftp.close()
     transport.close()

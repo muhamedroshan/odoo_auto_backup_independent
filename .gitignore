@@ -6,4 +6,4 @@ __pycache__/
 /tmp/odoo_backups/
 
 # Secrets
-.env
+#.env
