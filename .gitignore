@@ -1,0 +1,9 @@
+# Python artifacts
+__pycache__/
+*.pyc
+
+# Backup files
+/tmp/odoo_backups/
+
+# Secrets
+.env
