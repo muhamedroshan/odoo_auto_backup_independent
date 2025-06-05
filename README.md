@@ -53,6 +53,6 @@ crontab -e
 ```
 Add this line to run the script every Sunday at midnight:
 ```
-0 0 * * 0 /usr/bin/python3 /path/to/your/script.py >> /var/log/odoo_backup.log 2>&1
+0 0 * * 0 /usr/bin/python3 /path/to/your/main.py >> /var/log/odoo_backup.log 2>&1
 
 ```
