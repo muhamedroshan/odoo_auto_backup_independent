@@ -1,5 +1,5 @@
-import os
-from backup_utils import get_db_list, backup_database, upload_backup, cleanup_old_backups, REMOTE_BACKUP_PATH
+import os;
+from get_db_list import get_db_list;
 
 def main():
     db_list = get_db_list()
