@@ -57,4 +57,4 @@ Add this line to run the script every Sunday at midnight:
 
 ```
 ## To get a clear dynamic view in backed-up file check this repository
-[backup files view](https://example.com](https://github.com/muhamedroshan/backup-files-view#)
+[backup files view](https://github.com/muhamedroshan/backup-files-view#)
