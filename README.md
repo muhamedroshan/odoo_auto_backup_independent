@@ -56,3 +56,5 @@ Add this line to run the script every Sunday at midnight:
 0 0 * * 0 /usr/bin/python3 /path/to/your/main.py >> /var/log/odoo_backup.log 2>&1
 
 ```
+## To get a clear dynamic view in backed-up file check this repository
+[backup files view](https://example.com](https://github.com/muhamedroshan/backup-files-view#)
